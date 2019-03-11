@@ -264,6 +264,35 @@ router.post('/edit/sellerprofile/:id', (req, res)=>{
 });
 
 
+//bid route
+
+router.get('/buyerdashboard/bid-details/:id', function(req, res){
+    
+    
+    var id = {id:req.params.id};
+    
+    userModel.post_bid_details(id, function(result){
+        
+       userModel.getUser(req.session.uid, function(result2){
+           console.log(result2);
+           var data = {
+               user: result2,
+               bid_details: result
+           };
+           
+           res.render('project-bidded', data);
+       });
+        
+       
+        
+    });
+    
+    
+    
+    
+});
+
+
 
 module.exports = router;
 

@@ -71,31 +71,18 @@ module.exports={
 
 		db.getResult(sql,[id],function(result2){
 			callback(result2);
-			//console.log(result2);
 		});
 	},
 	getSpecPost: function(result2,callback){
 
 
-	   var arr = [];
-		console.log(result2);
+       var arr = 0;
 
-		if(result2.length > 0){
+		for(var i = 0; i < result2.length; i++){
 
-			for(var i = 0; i < result2.length; i++){
-
-				arr[i] = result2[i].postid;
-	
-			}
-
-		}else{
-
-	            arr = 0            
+			arr[i] = result2[i]['postid'];
 
 		}
-
-		
-		console.log(arr);
 
 
 		
@@ -150,4 +137,22 @@ module.exports={
 			callback(status);
 		});
 	},
+    //post bid details
+    post_bid_details: function(id, callback){
+        
+        var sql = "select * from bidtable where postid=?";
+        
+        db.execute(sql,[id.id],function(result){
+            
+           callback(result);
+            
+            console.log(result);
+            
+        });
+        
+        
+    }
+    
+    
+    
 }
